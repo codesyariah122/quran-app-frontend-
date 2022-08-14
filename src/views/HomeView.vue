@@ -45,7 +45,7 @@
           totalSurah.value = listsSurah.value.length
           setTimeout(() => {
             config.loading = false
-          }, 1500)
+          }, 2500)
         })
         .catch(err => console.error(err.response))
       }
@@ -55,7 +55,7 @@
         setTimeout(() => {
           quranToShow.value+=3
           config.loading_more = false
-        }, 2500)
+        }, 1500)
       }
 
       function QuranListSelect(){
@@ -66,7 +66,7 @@
           listsSelect.value = data.data
           setTimeout(() => {
             config.loading = false
-          }, 1500)
+          }, 2500)
         })
         .catch(err => console.error(err.response))
       }
