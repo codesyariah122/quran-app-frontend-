@@ -117,7 +117,7 @@
 			})
 
 			const route = useRoute()
-			let url = process.env.VUE_API_URL
+			let url = process.env.VUE_APP_API_URL
 			let num = route.params.num
 			let surah = ref({})
 			let verses = ref([])

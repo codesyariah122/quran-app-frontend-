@@ -24,7 +24,7 @@
         QuranSurahLists()
       })
 
-      let url = process.env.VUE_API_URL
+      let url = process.env.VUE_APP_API_URL
       let listsSelect = ref([])
       let listsSurah = ref([])
       let quranToShow = ref(9)
@@ -43,7 +43,6 @@
         .then(({data}) => {
           listsSurah.value = data
           totalSurah.value = listsSurah.value.length
-          console.log(listsSurah)
           setTimeout(() => {
             config.loading = false
           }, 1500)
