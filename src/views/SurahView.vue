@@ -2,7 +2,7 @@
 	<div class="surah__detail">
 		<div class="col-lg-12 col-sm-12">
 			<div class="d-grid gap-2">
-				<button @click="$router.go(-1), setActive(1)" class="btn btn-danger btn-sm rounded-pill circle">
+				<button @click="$router.push({path: '/'}), setActive(1)" class="btn btn-back btn-sm rounded-pill circle">
 					<i class="fas fa-lg fa-fw fa-arrow-left"></i> Back
 				</button>
 			</div>

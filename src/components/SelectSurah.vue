@@ -15,7 +15,7 @@
 			<select v-else class="form-select" aria-label="Default select example" @change="changeSurah($event)">
 				<option selected>Filter surah</option>
 				<option v-for="(item, index) in filteredSurah" :value="item.number" :key="index+1">
-					{{item.list.transliteration.id}}
+					{{item.number}} - {{item.list.transliteration.id}}
 				</option>
 			</select>
 		</div>

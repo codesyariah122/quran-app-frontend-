@@ -58,6 +58,11 @@
     }
 
     .surah__detail{
+      .btn-back{
+        background-color: $btnDark;
+        color: #fff;
+        border-color: #303030;
+      }
       .card {
         .card-body{
           .card-title{
@@ -100,28 +105,28 @@
       }
       .col__option-surah{
         select {
-          background-color: $dark;
+          background-color: $cardDark;
           color: #fff;
           border: $dark;
           option {
-            background: $dark!important;
+            background: $cardDark!important;
           }
         }
       }
       .col__surah-card{
         .card{
-          background-color: $dark;
+          background-color: $cardDark;
           color: #fff;
           .card-body{
             .card-title{
               font-family: 'AlQalam';
               .circle-number  {
-                background: rgba(0, 0, 0, 0.7);
+                background: $circleNumBg;
                 font-size: 1.3rem !important;
                 border-radius: 0.8em;
                 -moz-border-radius: 0.8em;
                 -webkit-border-radius: 0.8em;
-                color: #ffffff;
+                color: $circleNum;
                 display: inline-block;
                 font-weight: bold;
                 line-height: 1.5em;
@@ -152,19 +157,24 @@
       }
 
       .surah__detail{
+        .btn-back{
+          background-color: $btnDark;
+          color: #fff;
+          border-color: #303030;
+        }
         .card {
-          background-color: $dark;
+          background-color: $cardDark;
           color: #fff;
           .card-body{
             .card-title{
               font-family: 'AlQalam';
               .circle-number  {
-                background: rgba(0, 0, 0, 0.7);
-                font-size: 1.3rem !important;
+                background: $circleNumBg;
+                font-size: 1.5rem !important;
                 border-radius: 0.8em;
                 -moz-border-radius: 0.8em;
                 -webkit-border-radius: 0.8em;
-                color: #ffffff;
+                color: $circleNum;
                 display: inline-block;
                 font-weight: bold;
                 line-height: 1.5em;
@@ -194,7 +204,7 @@
 
             .pagination > .disabled > a
             {
-              color: crimson;
+              color: #525151;
               background-color: #000;
               border: solid 1px $borderColor!important;
             }
@@ -220,8 +230,9 @@
 
             .accordion-item {
               border: 1px solid $borderColor;
-              background: $accordionDark;
+              background: #040133;
               color:#fff;
+              text-align: justify!important;
             }
 
             .accordion-button:not(.collapsed) {

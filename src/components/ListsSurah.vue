@@ -7,6 +7,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div v-else>
 			<div v-if="config.change_surah" class="row justify-content-center">
 				<div class="col-md-6 col-sm-12 col__surah-card">
