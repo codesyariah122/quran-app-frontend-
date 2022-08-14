@@ -81,7 +81,10 @@
         }
       }
     }
-
+    .footer{
+      margin-top: 5rem!important;
+      position: sticky;
+    }
     &.dark-mode {
       background-color: lighten($dark, 5%);
       color: #fff;
@@ -237,6 +240,11 @@
             }
           }
         }
+      }
+
+      .footer{
+        background-color: $dark!important;
+        margin-top: 5rem!important;
       }
     }
   }

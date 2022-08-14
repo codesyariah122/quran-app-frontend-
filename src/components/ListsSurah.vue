@@ -2,7 +2,7 @@
 	<div class="mt-5 col-lg-12 col-sm-12">
 		<div v-if="config.loading" class="row justify-content-center">
 			<div class="col-lg-12 col-sm-12">
-				<div class="spinner-border text-success" role="status">
+				<div class="spinner-border text-success" role="status" style="width: 5rem; height: 5rem;">
 					<span class="visually-hidden">Loading...</span>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 								{{lists[index].name.transliteration.id}} - {{lists[index].name.translation.id}}
 							</h6>
 							
-							<button @click="ToSurah(lists[index].number)" class="btn btn-dark rounded-pill">
+							<button @click="ToSurah(lists[index].number)" class="btn btn-dark rounded-pill btn-sm">
 								Baca Quran
 							</button>
 						</div>
