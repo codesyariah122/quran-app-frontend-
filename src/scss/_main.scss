@@ -22,9 +22,6 @@
         font-size: 14px;
         background-color: #fff;
         color: #000;
-        option {
-          background: $cardDark!important;
-        }
       }
     }
     .col__surah-card{
@@ -205,6 +202,7 @@
           border: $dark;
           option {
             background: $cardDark!important;
+            color: #fff;
           }
         }
       }
