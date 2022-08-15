@@ -2,10 +2,18 @@
 
 ### Quran App is A PWA  
 - Preview on desktop  
-https://www.youtube.com/watch?v=rEjh6KJXz5c  
+ 
+
+https://user-images.githubusercontent.com/13291805/184562722-259550d6-2950-4ebc-9769-a51294ffb376.mp4
+
+
 
 - Preview on mobile  
-https://www.youtube.com/watch?v=RxjponzDPeo
+
+
+https://user-images.githubusercontent.com/13291805/184562725-f43e56e0-15bd-4c46-8f1f-4afcf030820f.mp4
+
+
 
 ## Project setup
 ```
