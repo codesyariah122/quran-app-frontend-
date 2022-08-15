@@ -45,7 +45,7 @@
           totalSurah.value = listsSurah.value.length
           setTimeout(() => {
             config.loading = false
-          }, 2500)
+          }, 1500)
         })
         .catch(err => console.error(err.response))
       }
@@ -66,7 +66,7 @@
           listsSelect.value = data.data
           setTimeout(() => {
             config.loading = false
-          }, 2500)
+          }, 1500)
         })
         .catch(err => console.error(err.response))
       }

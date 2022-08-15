@@ -9,7 +9,7 @@
 		</div>
 		<div class="card mt-4">
 			<div class="card-body">
-				<div v-if="config.loading" class="d-flex justify-content-center">
+				<div v-if="config.loading" class="mt-3 mb -3 d-flex justify-content-center">
 					<div class="spinner-border text-success" role="status" style="width: 5rem; height: 5rem;">
 						<span class="visually-hidden">Loading...</span>
 					</div>
@@ -37,12 +37,15 @@
 							<h2>
 								<span class="circle-number">
 									{{surah.number.inSurah}}
-								</span> {{surah.text.arab}} 
+								</span> <br>
+								{{surah.text.arab}}
 							</h2>
-							<span>{{surah.text.transliteration.en}}</span>
-							<blockquote class="mt-2 blockquote-footer">
-								{{surah.translation.id}}
-							</blockquote>
+							<div class="text">
+								<span>{{surah.text.transliteration.en}}</span>
+								<blockquote class="mt-2 blockquote-footer">
+									{{surah.translation.id}}
+								</blockquote>
+							</div>
 							<audio class="mt-2" ref="player" controls>
 								<source v-bind:src="surah.audio.primary" type="audio/mp3"/>
 							</audio>
@@ -81,7 +84,12 @@
 									</button>
 								</h5>
 								<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-									<div class="accordion-body text-start lh-lg">
+									<div v-if="config.loading" class="d-flex justify-content-center">
+										<div class="mt-2 mb-2 spinner-grow text-success" role="status" style="width: 2rem; height: 2rem;">
+											<span class="visually-hidden">Loading...</span>
+										</div>
+									</div>
+									<div v-else class="accordion-body text-start lh-lg">
 										{{surah.tafsir.id.short}}
 									</div>
 								</div>
@@ -93,7 +101,12 @@
 									</button>
 								</h5>
 								<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-									<div class="accordion-body text-start lh-lg">
+									<div v-if="config.loading" class="d-flex justify-content-center">
+										<div class="mt-2 mb-2 spinner-grow text-success" role="status" style="width: 2rem; height: 2rem;">
+											<span class="visually-hidden">Loading...</span>
+										</div>
+									</div>
+									<div v-else class="accordion-body text-start lh-lg">
 										{{surah.tafsir.id.long}}
 									</div>
 								</div>
@@ -163,7 +176,7 @@
 					surah.value = data.data
 					setTimeout(() => {
 						config.loading = false
-					}, 1000)
+					}, 1500)
 				})
 				.catch(err => console.error(err.response))
 			}
@@ -190,7 +203,6 @@
 				}else{
 					setActive(val)
 				}
-				// if(preBismillah) preBismillah.value = null
 				const ayat = parseInt(localStorage.getItem('active'))
 				surahDetail(num, ayat)
 

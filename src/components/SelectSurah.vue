@@ -12,8 +12,8 @@
 				</option>
 			</select>
 
-			<select v-else class="form-select" aria-label="Default select example" @change="changeSurah($event)">
-				<option selected>Filter surah</option>
+			<select v-else class="form-select" aria-label="Default select example" @change="changeSurah($event)" v-model="selected">
+				<option disabled value="">Filter surah</option>
 				<option v-for="(item, index) in filteredSurah" :value="item.number" :key="index+1">
 					{{item.number}} - {{item.list.transliteration.id}}
 				</option>
@@ -29,8 +29,17 @@
 			config: Object
 		},
 
+		data(){
+			return {
+				selected: '',
+				default: true
+			}
+		},
+
 		methods: {
 			changeSurah(e){
+				this.selected = e.target.value ? e.target.value : 'Filter Surah'
+				this.default = false
 				this.$emit('change-surah', e.target.value)
 			}
 		},

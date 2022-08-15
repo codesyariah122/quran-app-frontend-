@@ -3,7 +3,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = {
 	pwa: {
 		name: "Quran App",
-		themeColor: "#04c45b",
+		themeColor: "#141414",
 
 		workboxOptions: {
 			skipWaiting: true

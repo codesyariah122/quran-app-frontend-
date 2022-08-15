@@ -17,7 +17,7 @@
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container">
         <span class="text-muted">
-          Make with <i class="fab fa-gratipay"></i> <br>
+          Made with <i class="fab fa-gratipay"></i> <br>
           <a style="text-decoration: none;" href="https://github.com/codesyariah122?tab=repositories">
             <i class="fab fa-github"></i>codesyariah122
           </a>

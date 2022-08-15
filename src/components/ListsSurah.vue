@@ -39,6 +39,7 @@
 							<h5 class="card-title">
 								<span class="circle-number">{{lists[index].number}}</span> {{lists[index].name.short}}
 							</h5>
+
 							<h6 class="card-subtitle mb-2 text-muted">
 								{{lists[index].name.transliteration.id}} - {{lists[index].name.translation.id}}
 							</h6>
@@ -61,7 +62,7 @@
 				<div v-if="quranToShow <= lists.length || lists.length > quranToShow" class="col-lg-12 col-sm-12 mt-3 mb-5">
 					<div class="d-grid gap-2">
 						<button @click="ShowMoreSurah" class="btn btn-success rounded-pill btn-block">
-							<div v-if="loading_more">
+							<div v-if="config.loading_more">
 								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 								Loading...
 							</div>
