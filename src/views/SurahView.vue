@@ -37,8 +37,7 @@
 							<h2>
 								<span class="circle-number">
 									{{surah.number.inSurah}}
-								</span> <br>
-								{{surah.text.arab}}
+								</span> {{surah.text.arab}} 
 							</h2>
 							<div class="text">
 								<span>{{surah.text.transliteration.en}}</span>
@@ -50,9 +49,26 @@
 								<source v-bind:src="surah.audio.primary" type="audio/mp3"/>
 							</audio>
 						</div>
+
+						<div class="col-lg-8 col-sm-12 mt-5 col__option-surah-view">
+							<select v-if="config.loading" class="form-select" aria-label="Default select example">
+								<option>
+									<div class="spinner-border spinner-border-sm" role="status">
+										<span class="visually-hidden">Loading...</span>
+									</div>
+								</option>
+							</select>
+							<select v-else class="form-select" aria-label="Default select example" @change="changeSurah($event)" v-model="config.selected">
+								<option disabled value="">Filter Ayat</option>
+								<option v-for="(item, index) in listsSelect" :value="item.number.inSurah" :key="index+1">
+									Ayat - {{item.number.inSurah}}
+								</option>
+								
+							</select>
+						</div>
 					</div>
 				</div>
-				<div v-if="surah" class="row justify-content-center mt-5">
+				<div v-if="surah" class="row justify-content-center mt-2">
 					<div v-if="surah.text" class="col-lg-12 col-sm-12 card-title">
 						<nav aria-label="Page navigation example mt-2">
 							<ul class="pagination justify-content-center">
@@ -135,6 +151,7 @@
 			const route = useRoute()
 			let url = process.env.VUE_APP_API_URL
 			let num = route.params.num
+			let listsSelect = ref([])
 			let surah = ref({})
 			let verses = ref([])
 			let numberOfVerses = ref(0)
@@ -142,8 +159,11 @@
 			let config = reactive({
 				loading: null,
 				hide: false,
-				current: 1
+				current: 1,
+				selected: '',
+				default: true
 			})
+
 
 			function inSurah(num){
 				config.loading = true
@@ -153,9 +173,10 @@
 					preBismillah.value = data.data.preBismillah
 					verses.value = data.data.verses
 					numberOfVerses.value = data.data.numberOfVerses
+					listsSelect.value = data.data.verses
 					setTimeout(() => {
 						config.loading = false
-					}, 1500)
+					}, 500)
 				})
 				.catch(err => console.error(err.response))
 			}
@@ -179,6 +200,13 @@
 					}, 1500)
 				})
 				.catch(err => console.error(err.response))
+			}
+
+			function changeSurah(e){
+				config.selected = e.target.value ? e.target.value : 'Filter Surah'
+				config.default = false
+				setActive(config.selected)
+				surahDetail(num, config.selected)
 			}
 
 			function setActive(val){
@@ -217,6 +245,7 @@
 			return {
 				surah,
 				verses,
+				listsSelect,
 				numberOfVerses,
 				config,
 				preBismillah,
@@ -224,7 +253,8 @@
 				prevAyat,
 				nextAyat,
 				lastAyat,
-				setActive
+				setActive,
+				changeSurah
 			}
 		}
 	}

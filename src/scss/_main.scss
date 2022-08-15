@@ -24,6 +24,15 @@
         color: #000;
       }
     }
+    .col__option-surah-view{
+      margin-top: 2rem;
+      select {
+        font-family: 'Lobster', cursive!important;
+        font-size: 14px;
+        background-color: #fff;
+        color: #000;
+      }
+    }
     .col__surah-card{
       .card{
         .card-body{
@@ -80,7 +89,7 @@
           .card-title{
             h2{
               font-family: 'AlQalam';
-              text-align: justify;
+              // text-align: justify;
               margin-bottom: 1.5rem;
               .circle-number  {
                 background: rgba(0, 0, 0, 0.7);
@@ -206,6 +215,19 @@
           }
         }
       }
+      .col__option-surah-view{
+        select {
+          font-family: 'Lobster', cursive!important;
+          font-size: 14px;
+          background-color: $dark;
+          color: #fff;
+          border: $dark;
+          option {
+            background: $cardDark!important;
+            color: #fff;
+          }
+        }
+      }
       .col__surah-card{
         .card{
           background-color: $cardDark;
@@ -261,7 +283,7 @@
           .card-body{
             .card-title{
               h2{
-                text-align: justify;
+                // text-align: justify;
                 font-family: 'AlQalam';
                 .circle-number  {
                   background: $circleNumBg;
