@@ -1,3 +1,9 @@
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * @since 2.0
+ * @import App from vue
+ */
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
