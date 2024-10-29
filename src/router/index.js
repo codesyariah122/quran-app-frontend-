@@ -1,3 +1,9 @@
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * @since 2.0
+ * @callback
+ */
+
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SurahView from '../views/SurahView.vue'
