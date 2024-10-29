@@ -1,4 +1,9 @@
 /* eslint-disable no-console */
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * @since 2.0
+ * @return {boolean}
+ */
 
 import { register } from 'register-service-worker'
 
