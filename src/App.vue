@@ -3,6 +3,7 @@
     <div class="container">
       <div class="row justify-content-center mt-5">
         <div class="col-lg-12 col-sm-12 flex">
+          <small class="text-danger">*Pilih mode baca</small>
           <div class="mode-toggle" @click="modeToggle" :class="darkDark">
             <div class="toggle">
               <div id="dark-mode" type="checkbox"></div>

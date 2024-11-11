@@ -2,6 +2,7 @@
 	<div>
 		<div class="col-lg-12 col-sm-12 col__select-surah">
 			<h1>AlQuran Application</h1>
+			<img :src="require('@/assets/logo.png')" class="img-fluid">
 		</div>
 		<div class="col-lg-12 col-sm-12 col__option-surah">
 			<select v-if="config.loading" class="form-select" aria-label="Default select example">
