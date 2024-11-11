@@ -77,6 +77,10 @@
 </template>
 
 <script>
+	/**
+   * @author Puji Ermanto <pujiermanto@gmail.com> 
+   * */
+
 	export default {
 		props: ['lists', 'surah', 'quranToShow', 'config'],
 

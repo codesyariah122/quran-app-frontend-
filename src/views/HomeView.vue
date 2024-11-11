@@ -7,6 +7,9 @@
 </template>
 
 <script>
+  /**
+   * @author Puji Ermanto <pujiermanto@gmail.com> 
+   * */
   import {onMounted, reactive, ref} from 'vue'
   import axios from 'axios'
   import {SelectSurah, ListsSurah} from '@/components'

@@ -51,6 +51,11 @@
 						</div>
 
 						<div class="col-lg-8 col-sm-12 mt-5 col__option-surah-view">
+							<div class="alert alert-success" role="alert">
+								Pilih opsi filter ayat, untuk pindah ke ayat tertentu..
+							</div>
+
+
 							<select v-if="config.loading" class="form-select" aria-label="Default select example">
 								<option>
 									<div class="spinner-border spinner-border-sm" role="status">
@@ -58,6 +63,7 @@
 									</div>
 								</option>
 							</select>
+
 							<select v-else class="form-select" aria-label="Default select example" @change="changeSurah($event)" v-model="config.selected">
 								<option disabled value="">Filter Ayat</option>
 								<option v-for="(item, index) in listsSelect" :value="item.number.inSurah" :key="index+1">
@@ -137,6 +143,10 @@
 </template>
 
 <script>
+	/**
+   * @author Puji Ermanto <pujiermanto@gmail.com> 
+   * */
+	
 	import {onMounted, reactive, ref} from 'vue'
 	import {useRoute} from 'vue-router'
 	import axios from 'axios'
@@ -161,7 +171,7 @@
 				hide: false,
 				current: 1,
 				selected: '',
-				default: true
+			default: true
 			})
 
 
