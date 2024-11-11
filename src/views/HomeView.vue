@@ -39,7 +39,7 @@
 
       function QuranSurahLists(){
         config.loading = true
-        axios.get(`${url}data`)
+        axios.get(`${url}list-surah`)
         .then(({data}) => {
           listsSurah.value = data
           totalSurah.value = listsSurah.value.length
