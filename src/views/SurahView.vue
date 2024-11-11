@@ -34,20 +34,70 @@
 
 					<div v-if="surah" class="row justify-content-center mt-5">
 						<div v-if="surah.text" class="col-lg-12 col-sm-12 card-title">
-							<h2>
-								<span class="circle-number">
-									{{surah.number.inSurah}}
-								</span> {{surah.text.arab}} 
-							</h2>
-							<div class="text">
-								<span>{{surah.text.transliteration.en}}</span>
-								<blockquote class="mt-2 blockquote-footer">
-									{{surah.translation.id}}
-								</blockquote>
+							<small v-if="!newPlayer" class="text-danger">*Player baru tersedia</small>
+							<div class="d-flex justify-content-center mb-5">
+								<div class="d-grid gap-2">
+									<button v-if="!newPlayer" @click="newPlayerShow" class="btn btn-primary" type="button">Ganti Player Baru <i class="fa-solid fa-paint-roller"></i></button>
+									<button v-if="newPlayer" @click="changeOldPlayer" class="btn btn-outline-success" type="button"><i class="fa-solid fa-eraser"></i> Ganti Ke Player Lama</button>
+								</div>
 							</div>
-							<audio class="mt-2" ref="player" controls>
-								<source v-bind:src="surah.audio.primary" type="audio/mp3"/>
-							</audio>
+							<div v-if="!newPlayer">
+								<h2>
+									<span class="circle-number">
+										{{surah.number.inSurah}}
+									</span> {{surah.text.arab}} 
+								</h2>
+								<div class="audio-player mt-4">
+									<div class="audio-info">
+										<span class="audio-title">{{ surah.name }}</span>
+										<span class="audio-author">{{ surah.verse_number }}</span>
+									</div>
+									<audio ref="player" controls>
+										<source :src="surah.audio.primary" type="audio/mp3" />
+									</audio>
+								</div>
+							</div>
+
+							<div v-else id="player02"  class="player horizontal">
+								<div class="wrapper">
+									<div class="info-wrapper">
+										<!-- <img :src="require('@/assets/logo.png')" alt="LogoMusicImage"> -->
+										<div class="info">
+											<h1>
+												<span class="circle-number">
+													{{surah.number.inSurah}}
+												</span> {{surah.text.arab}} 
+											</h1>
+										</div>
+									</div>
+
+									<div class="controls text-white">
+										<div class="prev" @click="prevAyat(surah.number.inSurah-=1)">
+											<i class="fa-solid fa-backward fa-lg"></i>
+										</div>
+										<div class="play" @click="togglePlayPause">
+											<i v-show="isPlaying" class="fa-solid fa-pause fa-lg"></i>
+											<i v-show="!isPlaying" class="fa-solid fa-play fa-lg"></i>
+										</div>
+										<div class="next" @click="nextAyat(surah.number.inSurah+=1)">
+											<i class="fa-solid fa-forward fa-lg"></i>
+										</div>
+									</div>
+
+									<div class="track-time">
+										<div class="track" id="track-progress">
+											<div class="track-filled" id="track-filled" :style="{ width: trackProgress + '%' }"></div>
+										</div>
+										<div class="time">
+											<div id="current-time">{{ currentTime }}</div>
+											<div id="total-time">{{ totalTime }}</div>
+										</div>
+									</div>
+								</div>
+								<small v-if="newPlayer" class="text-info" style="margin-top: 5rem; color: #ffe;">*Player ini sedang masa pengembangan<br/> namun masih bisa digunakan untuk memutar audio ...</small>
+							</div>
+
+							<audio ref="audioPlayer" :src="surah.audio.primary" @timeupdate="updateProgress" @loadedmetadata="loadMetadata"></audio>
 						</div>
 
 						<div class="col-lg-8 col-sm-12 mt-5 col__option-surah-view">
@@ -155,7 +205,8 @@
 		setup(){
 			onMounted(() => {
 				inSurah(num),
-				surahDetail(num)
+				surahDetail(num),
+				loadMetadata()
 			})
 
 			const route = useRoute()
@@ -173,6 +224,54 @@
 				selected: '',
 			default: true
 			})
+			let audioPlayer = ref(null);
+			let currentTime = ref('00:00');
+			let totalTime = ref('00:00');
+			let trackProgress = ref(0);
+			let isPlaying = ref(false);
+			let newPlayer = ref(false);
+
+			function newPlayerShow() {
+				newPlayer.value = true;
+			}
+
+			function changeOldPlayer() {
+				newPlayer.value = false;
+			}
+
+			const loadMetadata = () => {
+				if (audioPlayer.value) {
+					const duration = audioPlayer.value.duration;
+					const minutes = Math.floor(duration / 60);
+					const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
+					totalTime.value = `${minutes}:${seconds}`;
+					updateProgress();
+				}
+			}
+
+			const togglePlayPause = () => {
+				if (audioPlayer.value) {
+					if (audioPlayer.value.paused) {
+						audioPlayer.value.play();
+						isPlaying.value = true; 
+						loadMetadata();
+					} else {
+						audioPlayer.value.pause();
+						isPlaying.value = false;
+					}
+				}
+			}
+
+			const updateProgress = () => {
+				if (audioPlayer.value) {
+					const current = audioPlayer.value.currentTime;
+					const duration = audioPlayer.value.duration;
+					const minutes = Math.floor(current / 60);
+					const seconds = Math.floor(current % 60).toString().padStart(2, '0');
+					currentTime.value = `${minutes}:${seconds}`;
+					trackProgress.value = (current / duration) * 100;
+				}
+			};
 
 
 			function inSurah(num){
@@ -264,8 +363,168 @@
 				nextAyat,
 				lastAyat,
 				setActive,
-				changeSurah
+				changeSurah,
+				audioPlayer,
+				currentTime,
+				totalTime,
+				trackProgress,
+				togglePlayPause,
+				updateProgress,
+				loadMetadata,
+				isPlaying,
+				newPlayer,
+				newPlayerShow,
+				changeOldPlayer
+
 			}
 		}
 	}
 </script>
+
+<style lang="css">
+	
+	#boxes * {
+		border: 1px solid transparent;
+	}
+
+	#boxes {
+		display: grid;
+		grid-template-columns: max-content max-content;
+		grid-template-areas: 
+		'A B'
+		'A C';
+		gap: 32px;
+		place-content: center;
+		height: 100vh;
+		width: 100%;
+	}
+
+	#player02 {
+		grid-area: B;
+		height: fit-content;
+	}
+
+	#player02 .controls {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.play, .prev, .next {
+		cursor: pointer;
+	}
+
+	.player {
+		background-color: #000e00;
+		padding: 28px;
+		border-radius: 20px;
+	}
+
+	.player img {
+		width: 84px;
+		height: 84px;
+		object-fit: cover;
+		border-radius: 10px;
+	}
+
+
+	.info {
+		color: #E1E1E6;
+	}
+
+	.info  {
+		opacity: 0.68;
+		font-size: 19px;
+	}
+
+	.info-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 30px;
+	}
+
+	.player h1 {
+		font-size: 2.3rem;
+		color: #E1E1E6;
+		padding-bottom: 7px;
+	}
+
+	.info .circle-number  {
+		background: rgba(255, 255, 255, 0.7);
+		font-size: 1.5rem !important;
+		border-radius: 0.8em;
+		-moz-border-radius: 0.8em;
+		-webkit-border-radius: 0.8em;
+		color: #000;
+		font-weight: 600;
+		display: inline-block;
+		font-weight: bold;
+		line-height: 1.5em;
+		margin-right: 5px;
+		text-align: center;
+		width: 1.6em;
+		font-family: 'AlQalam';
+	}
+
+
+	.controls {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 20px;
+	}
+
+	.track {
+		padding-top: 28px;
+		position: relative;
+	}
+
+	/*.track::before {
+		content: '';
+		height: 6px;
+		width: 100%;
+		display: block;
+		background: #D9D9D9;
+		opacity: 0.3;
+		border-radius: 10px;
+		position: absolute;
+	}*/
+
+	.track::after { 
+		content: '';
+		height: 6px;
+		width: 100%;
+		display: block;
+		background: rgba(76, 175, 80, 0.2);
+		border-radius: 10px;
+		top: 25px;
+	}
+	.track-filled {
+		height: 20px;
+		background-color: #4CAF50;
+		border-radius: 10px;
+	}
+
+	.time {
+		opacity: 0.7;
+		font-size: 14px;
+		color: gainsboro;
+
+		display: flex;
+		justify-content: space-between;
+		padding-top: 9.6px;
+	}
+
+	@media (max-width: 670px) {
+		#boxes {
+			display:flex;
+			flex-direction: column;
+
+			max-width: 270px;
+			margin: auto;
+
+
+			height: auto;
+			padding-block: 60px;
+		}
+	}
+</style>
