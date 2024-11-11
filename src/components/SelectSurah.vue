@@ -14,8 +14,8 @@
 
 			<select v-else class="form-select" aria-label="Default select example" @change="changeSurah($event)" v-model="selected">
 				<option disabled value="">Filter surah</option>
-				<option v-for="(item, index) in filteredSurah" :value="item.number" :key="index+1">
-					{{item.number}} - {{item.list.transliteration.id}}
+				<option v-for="(item, index) in filteredSurah" :value="item?.number" :key="index+1">
+					{{item?.number}} - {{item?.name?.transliteration?.id}}
 				</option>
 			</select>
 		</div>
@@ -32,7 +32,7 @@
 		data(){
 			return {
 				selected: '',
-				default: true
+			default: true
 			}
 		},
 
