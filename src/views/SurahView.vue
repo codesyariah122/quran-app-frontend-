@@ -44,9 +44,15 @@
 							<div v-if="!newPlayer">
 								<h2>
 									<span class="circle-number">
-										{{surah.number.inSurah}}
-									</span> {{surah.text.arab}} 
+										{{surah?.number?.inSurah}}
+									</span> {{surah?.text?.arab}} 
 								</h2>
+								<h6 class="mt-3">
+									{{surah?.text?.transliteration?.en}}
+								</h6>
+								<blockquote class="mb-5 text-small">
+									{{surah?.translation?.id}}
+								</blockquote>
 								<div class="audio-player mt-4">
 									<div class="audio-info">
 										<span class="audio-title">{{ surah.name }}</span>
@@ -63,11 +69,17 @@
 									<div class="info-wrapper">
 										<!-- <img :src="require('@/assets/logo.png')" alt="LogoMusicImage"> -->
 										<div class="info">
-											<h1>
+											<h2>
 												<span class="circle-number">
 													{{surah.number.inSurah}}
 												</span> {{surah.text.arab}} 
-											</h1>
+											</h2>
+											<h6 class="mt-3">
+												{{surah?.text?.transliteration?.en}}
+											</h6>
+											<blockquote class="mb-5 text-small">
+												{{surah?.translation?.id}}
+											</blockquote>
 										</div>
 									</div>
 
@@ -414,7 +426,7 @@
 	}
 
 	.player {
-		background-color: #000e00;
+		background-color: rgba(0, 14, 0, 0.9);
 		padding: 28px;
 		border-radius: 20px;
 	}
