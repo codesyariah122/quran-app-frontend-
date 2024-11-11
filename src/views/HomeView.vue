@@ -41,8 +41,8 @@
         config.loading = true
         axios.get(`${url}list-surah`)
         .then(({data}) => {
-          listsSurah.value = data
-          totalSurah.value = listsSurah.value.length
+          listsSurah.value = data?.data
+          totalSurah.value = listsSurah?.value?.length
           setTimeout(() => {
             config.loading = false
           }, 1000)
@@ -63,7 +63,7 @@
         axios
         .get(`${url}list-surah`)
         .then(({data}) => {
-          listsSelect.value = data.data
+          listsSelect.value = data?.data
           setTimeout(() => {
             config.loading = false
           }, 2500)
