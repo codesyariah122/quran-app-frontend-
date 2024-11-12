@@ -66,7 +66,6 @@
         axios
         .get(`${url}list-surah`)
         .then(({data}) => {
-          console.log(data)
           listsSelect.value = data?.data
           setTimeout(() => {
             config.loading = false

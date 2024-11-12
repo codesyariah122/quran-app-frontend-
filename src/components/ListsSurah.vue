@@ -33,6 +33,19 @@
 			</div>
 
 			<div v-else class="row justify-content-center">
+				
+				<div v-if="isPlay" class="col-lg-12">
+					<div class="toast show" id="audioToast">
+						<div class="toast-header">
+							<strong class="me-auto">Memutar Surah</strong>
+							<button type="button" class="btn-close" onclick="closeToast()"></button>
+						</div>
+						<div class="toast-body" id="toastMessage">
+							Sedang memutar: Surah <span id="surahName">{{ surahName }}</span>
+						</div>
+					</div>
+				</div>
+
 				<div v-if="quranToShow <= lists.length" v-for="(surah, index) in quranToShow" class="col-md-4 col-sm-12 mb-3 col__surah-card">
 					<div v-if="lists[index]" class="card">
 						<div class="card-body">
@@ -47,6 +60,16 @@
 							<button @click="ToSurah(lists[index].number)" class="btn btn-dark rounded-pill btn-sm">
 								Baca Quran
 							</button>
+
+							<div v-if="lists[index]?.audios && lists[index]?.audios.length">
+								<button @click="toggleAudio(index)" class="btn btn-outline-dark rounded-circle mt-3">
+									<i v-bind:class="isPlay[index] ? 'fa-solid fa-pause fa-lg text-success' : 'fas fa-play fa-lg text-success'"></i>
+								</button>
+							</div>
+
+							<!-- Single Hidden Audio Player -->
+							<audio ref="audioPlayer" :key="index" @ended="playNextAudio(index)" :src="currentAudioSrc[index]" hidden></audio>
+
 						</div>
 					</div>
 				</div>
@@ -84,14 +107,189 @@
 	export default {
 		props: ['lists', 'surah', 'quranToShow', 'config'],
 
+		data() {
+			return {
+				currentAudioSrc: {},
+				currentAudioIndex: {},
+				isPlay: false,
+				surahName: ''
+			};
+		},
+
+		// watch: {
+		// 	isPlay(newValue) {
+		// 		if (newValue) {
+		// 			this.showToast();
+		// 		} else {
+		// 			this.hideToast();
+		// 		}
+		// 	}
+		// },
+
+
 		methods: {
+			showToast() {
+				const toast = document.getElementById("audioToast");
+				if (toast) {
+					toast.classList.add("show");
+				}
+			},
+			hideToast() {
+				const toast = document.getElementById("audioToast");
+				if (toast) {
+					toast.classList.remove("show");
+				}
+			},
+			closeToast() {
+				this.isPlay = false;
+			},
+
+
 			ShowMoreSurah(){
 				this.$emit('show-more')
 			},
 
 			ToSurah(val){
 				this.$router.push(`/surah/${val}`)
+			},
+
+			toggleAudio(index) {
+				if (this.isPlay) {
+					this.pauseAudio(index);
+				} else {
+					this.playAllAudios(index);
+				}
+			},
+
+
+			togglePlayPause(index) {
+				if (this.isPlay) {
+					this.pauseAudio(index);
+				} else {
+					this.playAllAudios(index);
+				}
+			},
+
+			pauseAudio(index) {
+				this.isPlay = false;
+				const audioElement = this.$refs.audioPlayer[index];
+				if (audioElement) {
+					audioElement.pause();
+				}
+			},
+
+			playAudioManually(index) {
+				const audioElement = this.$refs.audioPlayer[index];
+				if (audioElement) {
+					audioElement.play().catch(error => {
+						alert("Playback diblokir. Silakan klik untuk memutar.");
+					});
+				}
+			},
+
+			playAllAudios(index) {
+				this.isPlay = true;
+				this.currentAudioIndex[index] = 0;
+				this.currentAudioSrc[index] = this.lists[index].audios[0];
+
+				const audioElement = this.$refs.audioPlayer[index];
+				if (audioElement) {
+					this.surahName = this.lists[index].name.transliteration.id
+					setTimeout(() => {
+						audioElement.load();
+						audioElement.play()
+						.then(() => console.log("Memutar audio untuk index:", index))
+						.catch(error => {
+							console.warn("Autoplay dicegah untuk index:", index, error);
+							// alert("Silakan klik untuk memulai playback.");
+							this.playAudioManually(index);
+						});
+					}, 300);
+				} else {
+					console.error("Elemen audio tidak ditemukan untuk index:", index);
+				}
+			},
+
+			playNextAudio(index) {
+				this.currentAudioIndex[index]++;
+
+				if (this.currentAudioIndex[index] < this.lists[index].audios.length) {
+					this.currentAudioSrc[index] = this.lists[index].audios[this.currentAudioIndex[index]];
+					const audioElement = this.$refs.audioPlayer[index];
+
+					if (audioElement) {
+						audioElement.load();
+						audioElement.play()
+						.then(() => console.log("Memutar audio berikutnya untuk index:", index))
+						.catch(error => {
+							console.warn("Autoplay dicegah untuk audio berikutnya:", error);
+							// alert("Klik OK untuk melanjutkan playback manual.");
+							this.playAudioManually(index);
+						});
+					}
+				} else {
+					// if (index + 1 < this.lists.length) {
+					// 	this.playAllAudios(index + 1);
+					// } else {
+					// 	console.log("Semua audio sudah diputar");
+					// }
+					console.log("Semua audio sudah selesai diputar, autoplay berhenti.");
+					this.isPlay = false;
+				}
 			}
+
+
+
 		}
 	}
 </script>
+
+<style>
+/* Custom styles for the play button */
+.btn-primary i {
+	color: #fff;
+	font-size: 1.2em;
+	padding: 0.3em;
+}
+
+/* Toast styling */
+.toast {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	min-width: 250px;
+	padding: 10px;
+	background-color: #333;
+	color: #fff;
+	border-radius: 5px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
+	z-index: 1000;
+}
+
+.toast.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.toast-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
+}
+
+.toast-body {
+	margin-top: 5px;
+}
+
+/*.btn-close {
+	background: none;
+	border: none;
+	color: #fff;
+	font-size: 1.2rem;
+	cursor: pointer;
+}*/
+
+</style>
