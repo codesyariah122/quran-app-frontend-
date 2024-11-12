@@ -87,9 +87,11 @@
 										<div class="prev" @click="prevAyat(surah.number.inSurah-=1)">
 											<i class="fa-solid fa-backward fa-lg"></i>
 										</div>
-										<div class="play" @click="togglePlayPause">
-											<i v-show="isPlaying" class="fa-solid fa-pause fa-lg"></i>
-											<i v-show="!isPlaying" class="fa-solid fa-play fa-lg"></i>
+										<div class="play" v-if="isPlaying" @click="togglePlayPause">
+											<i class="fa-solid fa-pause fa-lg"></i>
+										</div>
+										<div v-else class="play" @click="togglePlayPause">
+											<i class="fa-solid fa-play fa-lg"></i>
 										</div>
 										<div class="next" @click="nextAyat(surah.number.inSurah+=1)">
 											<i class="fa-solid fa-forward fa-lg"></i>
