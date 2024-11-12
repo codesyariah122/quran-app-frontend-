@@ -62,8 +62,11 @@
 							</button>
 
 							<div v-if="lists[index]?.audios && lists[index]?.audios.length">
-								<button @click="toggleAudio(index)" class="btn btn-outline-dark rounded-circle mt-3">
-									<i v-bind:class="isPlay[index] ? 'fa-solid fa-pause fa-lg text-success' : 'fas fa-play fa-lg text-success'"></i>
+								<button v-if="isPlay && !index" @click="pauseAudio(index)" class="btn btn-outline-dark rounded-circle mt-3">
+									<i class="fa-solid fa-pause fa-lg text-success"></i>
+								</button>
+								<button v-else @click="toggleAudio(index)" class="btn btn-outline-dark rounded-circle mt-3">
+									<i v-bind:class="isPlay ? 'fa-solid fa-pause fa-lg text-success' : 'fas fa-play fa-lg text-success'"></i>
 								</button>
 							</div>
 
