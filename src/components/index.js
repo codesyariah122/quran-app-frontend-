@@ -6,8 +6,10 @@
 
 import ListsSurah from './ListsSurah'
 import SelectSurah from './SelectSurah'
+import ProductPopup from './ProductPopup'
 
 export {
 	ListsSurah,
-	SelectSurah
+	SelectSurah,
+	ProductPopup
 }

@@ -6,7 +6,8 @@ module.exports = {
 		themeColor: "#141414",
 
 		workboxOptions: {
-			skipWaiting: true
+			skipWaiting: true,
+			clientsClaim: true
 		},
 		icons: {
 			favicon32: 'img/icons/favicon-32x32.png',
@@ -29,8 +30,8 @@ module.exports = {
 
 	configureWebpack: {
 		plugins: [
-		new Dotenv()
-		],
+			new Dotenv()
+			],
 
 	}
 };

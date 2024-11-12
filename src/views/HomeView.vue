@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <ProductPopup />
     <SelectSurah :lists="listsSelect" :config="config" @change-surah="ChangeSurah($event)"/>
 
     <ListsSurah :lists="listsSurah" :quranToShow="quranToShow" :config="config" @show-more="ShowMoreSurah" :surah="surah" @reload-change-surah="reloadChangeSurah"/>
@@ -12,13 +13,14 @@
    * */
   import {onMounted, reactive, ref} from 'vue'
   import axios from 'axios'
-  import {SelectSurah, ListsSurah} from '@/components'
+  import {SelectSurah, ListsSurah, ProductPopup} from '@/components'
 
   export default {
     name: 'HomeView',
     components: {
       SelectSurah,
-      ListsSurah
+      ListsSurah,
+      ProductPopup
     },
 
     setup(){
