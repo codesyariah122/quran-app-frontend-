@@ -429,6 +429,11 @@
 
 	.player {
 		background-color: rgba(0, 14, 0, 0.9);
+
+		background-image: url('@/assets/pattern-corner2.png');
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
 		padding: 28px;
 		border-radius: 20px;
 	}
@@ -446,7 +451,7 @@
 	}
 
 	.info  {
-		opacity: 0.68;
+		opacity: 0.9;
 		font-size: 19px;
 	}
 
@@ -519,8 +524,9 @@
 	}
 
 	.time {
-		opacity: 0.7;
-		font-size: 14px;
+		opacity: 1;
+		font-size: 16px;
+		font-weight: 500;
 		color: gainsboro;
 
 		display: flex;
