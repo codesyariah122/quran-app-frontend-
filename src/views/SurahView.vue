@@ -34,14 +34,14 @@
 
 					<div v-if="surah" class="row justify-content-center mt-5">
 						<div v-if="surah.text" class="col-lg-12 col-sm-12 card-title">
-							<small v-if="!newPlayer" class="text-danger">*Player baru tersedia</small>
+							<!-- <small v-if="!newPlayer" class="text-danger">*Player baru tersedia</small>
 							<div class="d-flex justify-content-center mb-5">
 								<div class="d-grid gap-2">
 									<button v-if="!newPlayer" @click="newPlayerShow" class="btn btn-primary" type="button">Ganti Player Baru <i class="fa-solid fa-paint-roller"></i></button>
 									<button v-if="newPlayer" @click="changeOldPlayer" class="btn btn-outline-success" type="button"><i class="fa-solid fa-eraser"></i> Ganti Ke Player Lama</button>
 								</div>
-							</div>
-							<div v-if="!newPlayer">
+							</div> -->
+							<!-- <div v-if="!newPlayer">
 								<h2>
 									<span class="circle-number">
 										{{surah?.number?.inSurah}}
@@ -62,9 +62,9 @@
 										<source :src="surah.audio.primary" type="audio/mp3" />
 									</audio>
 								</div>
-							</div>
+							</div> -->
 
-							<div v-else id="player02"  class="player horizontal">
+							<div id="player02"  class="player horizontal">
 								<div class="wrapper">
 									<div class="info-wrapper">
 										<!-- <img :src="require('@/assets/logo.png')" alt="LogoMusicImage"> -->
@@ -108,7 +108,7 @@
 										</div>
 									</div>
 								</div>
-								<small v-if="newPlayer" class="text-info" style="margin-top: 5rem; color: #ffe;">*Player ini sedang masa pengembangan<br/> namun masih bisa digunakan untuk memutar audio ...</small>
+								<!-- <small v-if="newPlayer" class="text-info" style="margin-top: 5rem; color: #ffe;">*Player ini sedang masa pengembangan<br/> namun masih bisa digunakan untuk memutar audio ...</small> -->
 							</div>
 
 							<audio ref="audioPlayer" :src="surah.audio.primary" @timeupdate="updateProgress" @loadedmetadata="loadMetadata"></audio>
@@ -429,7 +429,6 @@
 
 	.player {
 		background-color: rgba(0, 14, 0, 0.9);
-
 		background-image: url('@/assets/pattern-corner2.png');
 		background-position: center center;
 		background-size: cover;
@@ -453,6 +452,11 @@
 	.info  {
 		opacity: 0.9;
 		font-size: 19px;
+	}
+
+	.wrapper {
+		width: 90%;
+		margin-left: 3rem;
 	}
 
 	.info-wrapper {
@@ -538,13 +542,24 @@
 		#boxes {
 			display:flex;
 			flex-direction: column;
-
-			max-width: 270px;
+			width: 100%;
+			max-width: 100%;
 			margin: auto;
-
-
 			height: auto;
 			padding-block: 60px;
+		}
+
+		.wrapper {
+			width: 100%;
+			margin-left: 0;
+		}
+
+		.player {
+			background-color: rgba(0, 14, 0, 0.9);
+			background-image: url('@/assets/quran-pattern.png');
+			background-position: bottom center;
+			background-size: contain;
+			background-repeat: no-repeat;
 		}
 	}
 </style>
