@@ -259,7 +259,7 @@
 					const minutes = Math.floor(duration / 60);
 					const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
 					totalTime.value = `${minutes}:${seconds}`;
-					updateProgress();
+					updateProgress(duration);
 				}
 			}
 
@@ -276,7 +276,7 @@
 				}
 			}
 
-			const updateProgress = () => {
+			const updateProgress = (duration) => {
 				if (audioPlayer.value) {
 					const current = audioPlayer.value.currentTime;
 					const duration = audioPlayer.value.duration;
@@ -284,6 +284,10 @@
 					const seconds = Math.floor(current % 60).toString().padStart(2, '0');
 					currentTime.value = `${minutes}:${seconds}`;
 					trackProgress.value = (current / duration) * 100;
+					
+					if(totalTime.value == currentTime.value) {
+						isPlaying.value = false;
+					}
 				}
 			};
 
