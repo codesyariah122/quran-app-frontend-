@@ -172,15 +172,16 @@ export default {
     };
   },
   methods: {
+    ToSurah(val) {
+      this.$router.push(`/surah/${val}`);
+    },
     toggleAudio(index) {
-      // Hentikan audio lain yang sedang bermain
       this.lists.forEach((surah, i) => {
         if (i !== index && surah.isPlaying) {
           this.pauseAudio(i);
         }
       });
 
-      // Toggle status audio untuk kartu saat ini
       if (this.lists[index].isPlaying) {
         this.pauseAudio(index);
       } else {
