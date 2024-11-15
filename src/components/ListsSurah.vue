@@ -176,6 +176,11 @@ export default {
     ToSurah(val) {
       this.$router.push(`/surah/${val}`);
     },
+	
+    ShowMoreSurah() {
+      this.$emit("show-more");
+    },
+
     toggleAudio(index) {
       this.lists.forEach((surah, i) => {
         if (i !== index && surah.isPlaying) {
@@ -202,7 +207,7 @@ export default {
     playAllAudios(index) {
       this.isPlay = true;
       this.lists[index].isPlaying = true;
-	  this.currentAudioIndex[index] = 0;
+      this.currentAudioIndex[index] = 0;
       this.currentAudioSrc[index] = this.lists[index].audios[0];
       const audioElement = this.$refs.audioPlayer[index];
       if (audioElement) {
@@ -260,6 +265,9 @@ export default {
         // }
         console.log("Semua audio sudah selesai diputar, autoplay berhenti.");
         this.isPlay = false;
+        setTimeout(() => {
+          this.pauseAudio(index);
+        }, 500);
       }
     },
   },
