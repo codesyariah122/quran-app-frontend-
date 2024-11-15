@@ -167,6 +167,7 @@ export default {
   data() {
     return {
       currentAudioSrc: {},
+      currentAudioIndex: {},
       isPlay: false,
       surahName: "",
     };
@@ -201,16 +202,64 @@ export default {
     playAllAudios(index) {
       this.isPlay = true;
       this.lists[index].isPlaying = true;
+	  this.currentAudioIndex[index] = 0;
       this.currentAudioSrc[index] = this.lists[index].audios[0];
       const audioElement = this.$refs.audioPlayer[index];
       if (audioElement) {
         this.surahName = this.lists[index].name.transliteration.id;
         setTimeout(() => {
           audioElement.load();
-          audioElement.play().catch(() => {
-            this.playAudioManually(index);
-          });
+          audioElement
+            .play()
+            .then(() => {
+              console.log("Memutar audio untuk index:", index);
+            })
+            .catch(() => {
+              console.warn("Autoplay dicegah untuk index:", index, error);
+              this.playAudioManually(index);
+            });
         }, 300);
+      }
+    },
+
+    playAudioManually(index) {
+      const audioElement = this.$refs.audioPlayer[index];
+      if (audioElement) {
+        audioElement.play().catch(() => {
+          alert("Playback diblokir. Silakan klik untuk memutar.");
+        });
+      }
+    },
+
+    playNextAudio(index) {
+      this.currentAudioIndex[index]++;
+
+      if (this.currentAudioIndex[index] < this.lists[index].audios.length) {
+        this.currentAudioSrc[index] =
+          this.lists[index].audios[this.currentAudioIndex[index]];
+        const audioElement = this.$refs.audioPlayer[index];
+
+        if (audioElement) {
+          audioElement.load();
+          audioElement
+            .play()
+            .then(() =>
+              console.log("Memutar audio berikutnya untuk index:", index)
+            )
+            .catch((error) => {
+              console.warn("Autoplay dicegah untuk audio berikutnya:", error);
+              // alert("Klik OK untuk melanjutkan playback manual.");
+              this.playAudioManually(index);
+            });
+        }
+      } else {
+        // if (index + 1 < this.lists.length) {
+        // 	this.playAllAudios(index + 1);
+        // } else {
+        // 	console.log("Semua audio sudah diputar");
+        // }
+        console.log("Semua audio sudah selesai diputar, autoplay berhenti.");
+        this.isPlay = false;
       }
     },
   },
