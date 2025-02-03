@@ -1,0 +1,40 @@
+{
+  "name": "quran-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.2",
+    "@popperjs/core": "^2.11.6",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.0",
+    "dotenv": "^16.0.1",
+    "dotenv-expand": "^8.0.3",
+    "dotenv-webpack": "^8.0.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
+    "register-service-worker": "^1.7.2",
+    "vue": "^3.2.13",
+    "vue-axios": "^3.4.1",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-pwa": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "sass": "^1.32.7",
+    "sass-loader": "^12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"
+}

@@ -1,0 +1,508 @@
+  @import '_variables.scss';
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  body {
+    background-color: #fff;
+    color: $dark;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+
+  body {
+    .col__option-surah{
+      margin-top: 2rem;
+      select {
+        font-family: 'Lobster', cursive!important;
+        font-size: 14px;
+        background-color: #fff;
+        color: #000;
+      }
+    }
+    .col__option-surah-view{
+      margin-top: 2rem;
+      select {
+        font-family: 'Lobster', cursive!important;
+        font-size: 14px;
+        background-color: #fff;
+        color: #000;
+      }
+    }
+    .col__surah-card{
+      .card{
+        .card-body{
+          .card-title{
+            font-family: 'AlQalam';
+            margin-bottom: 1rem;
+            .circle-number  {
+              background: rgba(0, 0, 0, 0.7);
+              font-size: 1.3rem !important;
+              border-radius: 0.8em;
+              -moz-border-radius: 0.8em;
+              -webkit-border-radius: 0.8em;
+              color: #ffffff;
+              display: inline-block;
+              font-weight: bold;
+              line-height: 1.5em;
+              margin-right: 5px;
+              text-align: center;
+              width: 1.6em;
+            }
+          }
+          .card-subtitle{
+            font-family: 'Lobster', cursive;
+          }
+          .truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: var(--line-clamp, 4);
+            -webkit-box-orient: vertical;
+            word-break: var(--word-break, "none");
+            overflow: hidden;
+            hyphens: auto;
+            text-align: var(--align, left);
+            --is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+            --delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+            animation: states 1s var(--delay) paused;
+            @keyframes states {
+              0% {
+                word-break: break-all;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .surah__detail{
+      .btn-back{
+        background-color: $btnDark;
+        color: #fff;
+        border-color: #303030;
+      }
+      .card {
+        .card-body{
+          .card-title{
+            h2{
+              font-family: 'AlQalam';
+              // text-align: justify;
+              margin-bottom: 1.5rem;
+              .circle-number  {
+                background: rgba(0, 0, 0, 0.7);
+                font-size: 1.3rem !important;
+                border-radius: 0.8em;
+                -moz-border-radius: 0.8em;
+                -webkit-border-radius: 0.8em;
+                color: #ffffff;
+                display: inline-block;
+                font-weight: bold;
+                line-height: 1.5em;
+                margin-right: 5px;
+                text-align: center;
+                width: 1.6em;
+              }
+            }
+            .text{
+              font-family: 'Montserrat', sans-serif;
+            }
+          }
+          .pagination > li > a
+          {
+            font-family: 'Lobster', cursive;
+            background-color: $pageNavDark;
+            color: #fff;
+          }
+
+          .pagination > li > a:focus,
+          .pagination > li > a:hover,
+          .pagination > li > span:focus,
+          .pagination > li > span:hover
+          {
+            font-family: 'Lobster', cursive;
+            color: #5a5a5a;
+            background-color: #eee;
+            border-color: $borderColor;
+          }
+
+          .pagination > .disabled > a
+          {
+            font-family: 'Abril Fatface', cursive;
+            color: #525151;
+            background-color: #000;
+            border: solid 1px $borderColor!important;
+          }
+
+          .pagination > .active > a:hover
+          {
+            background-color: #5A4181 !important;
+            border: solid 1px $borderColor;
+          }
+
+          .accordion-button {
+            font-family: 'Lobster', cursive;
+            font-size: inherit;
+            background: $buttonAccordionDark;
+            color:#fff;
+            font-size:18px;
+          }
+          .accordion-button.collapsed {
+            background: $buttonAccordionDark;
+          }
+
+          .accordion-button.collapsed::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+          }
+
+          .accordion-item {
+            font-family: 'Lato', sans-serif;
+            border: 1px solid $borderColor;
+            background: #fff;
+            color:$dark;
+            text-align: justify!important;
+            font-size:14px;
+            word-spacing: 5px;
+            letter-spacing: 3px;
+          }
+
+          .accordion-button:not(.collapsed) {
+            color: inherit;
+            background: $dark;
+            color: #fff;
+          }
+
+          .accordion-button:not(.collapsed)::after  {
+            filter: brightness(00%) invert(70%);
+            color: #fff;
+          }
+
+          .accordion-button:focus {
+            box-shadow: inherit;
+          }
+        }
+      }
+    }
+    .footer{
+      margin-top: 5rem!important;
+      position: sticky;
+    }
+    &.dark-mode {
+      background-color: lighten($dark, 5%);
+      color: #fff;
+      .flex {
+        h1 {
+          color: #fff;
+        }
+      }
+      .col__select-surah{
+        h1{
+          color: #fff;
+        }
+      }
+      .col__option-surah{
+        select {
+          font-family: 'Lobster', cursive!important;
+          font-size: 14px;
+          background-color: $cardDark;
+          color: #fff;
+          border: $dark;
+          option {
+            background: $cardDark!important;
+            color: #fff;
+          }
+        }
+      }
+      .col__option-surah-view{
+        select {
+          font-family: 'Lobster', cursive!important;
+          font-size: 14px;
+          background-color: $dark;
+          color: #fff;
+          border: $dark;
+          option {
+            background: $cardDark!important;
+            color: #fff;
+          }
+        }
+      }
+      .col__surah-card{
+        .card{
+          background-color: $cardDark;
+          color: #fff;
+          .card-body{
+            .card-title{
+              font-family: 'AlQalam';
+              .circle-number  {
+                background: $circleNumBg;
+                font-size: 1.3rem !important;
+                border-radius: 0.8em;
+                -moz-border-radius: 0.8em;
+                -webkit-border-radius: 0.8em;
+                color: $circleNum;
+                display: inline-block;
+                font-weight: bold;
+                line-height: 1.5em;
+                margin-right: 5px;
+                text-align: center;
+                width: 1.6em;
+              }
+            }
+            .truncate {
+              display: -webkit-box;
+              -webkit-line-clamp: var(--line-clamp, 4);
+              -webkit-box-orient: vertical;
+              word-break: var(--word-break, "none");
+              overflow: hidden;
+              hyphens: auto;
+              text-align: var(--align, left);
+              --is-single-line: 1 - Clamp(0, Calc(var(--line-clamp) - 1), var(--line-clamp));
+              --delay: Calc(-1s * (var(--is-single-line, 1) - 1));
+              animation: states 1s var(--delay) paused;
+              @keyframes states {
+                0% {
+                  word-break: break-all;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .surah__detail{
+        .btn-back{
+          background-color: $btnDark;
+          color: #fff;
+          border-color: #303030;
+        }
+        .card {
+          background-color: $cardDark;
+          color: #fff;
+          .card-body{
+            .card-title{
+              h2{
+                // text-align: justify;
+                font-family: 'AlQalam';
+                .circle-number  {
+                  background: $circleNumBg;
+                  font-size: 1.5rem !important;
+                  border-radius: 0.8em;
+                  -moz-border-radius: 0.8em;
+                  -webkit-border-radius: 0.8em;
+                  color: $circleNum;
+                  display: inline-block;
+                  font-weight: bold;
+                  line-height: 1.5em;
+                  margin-right: 5px;
+                  text-align: center;
+                  width: 1.6em;
+                }
+              }
+              .text{
+                // font-family: 'Abril Fatface', cursive;
+                // font-family: 'Lobster', cursive;
+                font-family: 'Montserrat', sans-serif;
+              }
+            }
+            audio{
+              background-color: #2f2f30;
+            }
+            .pagination > li > a
+            {
+              font-family: 'Lobster', cursive;
+              background-color: $pageNavDark;
+              color: #fff;
+            }
+
+            .pagination > li > a:focus,
+            .pagination > li > a:hover,
+            .pagination > li > span:focus,
+            .pagination > li > span:hover
+            {
+              font-family: 'Lobster', cursive;
+              color: #5a5a5a;
+              background-color: #eee;
+              border-color: $borderColor;
+            }
+
+            .pagination > .disabled > a
+            {
+              font-family: 'Abril Fatface', cursive;
+              color: #525151;
+              background-color: #000;
+              border: solid 1px $borderColor!important;
+            }
+
+            .pagination > .active > a:hover
+            {
+              background-color: #5A4181 !important;
+              border: solid 1px $borderColor;
+            }
+
+            .accordion-button {
+              font-family: 'Lobster', cursive;
+              font-size: inherit;
+              background: $buttonAccordionDark;
+              color:#fff;
+              font-size:18px;
+            }
+            .accordion-button.collapsed {
+              background: $buttonAccordionDark;
+            }
+
+            .accordion-button.collapsed::after {
+              background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            }
+
+            .accordion-item {
+              font-family: 'Lato', sans-serif;
+              border: 1px solid $borderColor;
+              background: #040133;
+              color:#fff;
+              text-align: justify!important;
+              font-size:14px;
+              word-spacing: 5px;
+              letter-spacing: 3px;
+            }
+
+            .accordion-button:not(.collapsed) {
+              color: inherit;
+              background: $dark;
+              color: #fff;
+            }
+
+            .accordion-button:not(.collapsed)::after  {
+              filter: brightness(00%) invert(70%);
+              color: #fff;
+            }
+
+            .accordion-button:focus {
+              box-shadow: inherit;
+            }
+          }
+        }
+      }
+
+      .footer{
+        background-color: $dark!important;
+        margin-top: 5rem!important;
+      }
+    }
+  }
+
+  .mode-toggle {
+    position: relative;
+    padding: 0;
+    width: 44px;
+    height: 24px;
+    min-width: 36px;
+    min-height: 20px;
+    background-color: $mode-toggle-bg;
+    border: 0;
+    border-radius: 24px;
+    outline: 0;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+    appearance: none;
+    transition: background-color .5s ease;
+
+    .toggle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      margin: auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      box-shadow: inset 0 0 0 2px #a5abba;
+      overflow: hidden;
+      transition: transform .5s ease;
+
+      #dark-mode {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 50%;
+
+        &:before {
+          content: '';
+          position: relative;
+          width: 100%;
+          height: 100%;
+          left: 50%;
+          float: left;
+          background-color: #a5abba;
+          transition: border-radius .5s ease, width .5s ease, height .5s ease, left .5s ease, transform .5s ease;
+        }
+      }
+    }
+  }
+
+  body.dark-mode {
+    color: #fff;
+    .mode-toggle {
+      background-color: lighten($mode-toggle-bg, 5%);
+
+      .toggle {
+        transform: translateX(19px);
+
+        #dark-mode {
+          &:before {
+            border-radius: 50%;
+            width: 150%;
+            height: 85%;
+            left: 40%;
+            transform: translate(-10%, -40%), rotate(-35deg);
+          }
+        }
+      }
+    }
+  }
+  html {
+    font-size: 16px;
+  }
+
+  html, body, #app {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Source Sans Pro";
+  }
+
+  h1 {
+    font-weight: 400;
+    transition: color .5s ease;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  nav {
+    padding: 30px;
+
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
