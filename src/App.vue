@@ -40,7 +40,7 @@ export default {
   },
 
   mounted() {
-    loadKoFi();
+    this.loadKoFi();
   },
 
   methods: {
