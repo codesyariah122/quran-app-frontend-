@@ -70,6 +70,7 @@
         <div
           v-if="quranToShow <= lists.length"
           v-for="(surah, index) in quranToShow"
+          :key="{ index }"
           class="col-md-4 col-sm-12 mb-3 col__surah-card"
         >
           <div v-if="lists[index]" class="card">
@@ -212,6 +213,7 @@ export default {
       const audioElement = this.$refs.audioPlayer[index];
       if (audioElement) {
         this.surahName = this.lists[index].name.transliteration.id;
+        // console.log(this.lists[index].number);
         setTimeout(() => {
           audioElement.load();
           audioElement
